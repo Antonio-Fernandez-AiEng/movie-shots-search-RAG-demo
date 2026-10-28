@@ -1,0 +1,9 @@
+numpy<2
+transformers<4.40.0
+open-clip-torch
+chromadb
+fastapi
+uvicorn
+Pillow
+pydantic
+python-multipart

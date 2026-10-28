@@ -1,0 +1,12 @@
+services:
+  video-rag:
+    build: .
+    container_name: shotlist_rag_search
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/extracted_shots:/app/data/extracted_shots
+      - ./databases/chroma_db:/app/databases/chroma_db
+    environment:
+      - PYTHONUNBUFFERED=1
