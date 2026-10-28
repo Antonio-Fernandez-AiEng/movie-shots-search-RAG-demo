@@ -12,29 +12,29 @@ from config import SHOTS_DIR
 processor: VideoProcessor | None = None
 
 # ------------------------------------------------------------------------------
-# LIFESPAN (Carga de recursos al iniciar)
+# LIFESPAN (Loading resources at start)
 # ------------------------------------------------------------------------------
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global processor
 
-    print("🚀 [LIFESPAN] Iniciando servicios de demo...")
+    print("🚀 [LIFESPAN] Starting demo service...")
     
-    # 1. Conectar a ChromaDB pre-poblada
+    # 1. Connect to chroma db with pre ingested trailers
     db_manager.connect()
-    print("✅ [LIFESPAN] ChromaDB conectada correctamente")
+    print("✅ [LIFESPAN] ChromaDB succesfully connected")
 
-    # 2. Cargar el codificador de texto de SigLIP
+    # 2. Load Siglip encoder
     processor = VideoProcessor()
-    print("✅ [LIFESPAN] Procesador SigLIP listo")
+    print("✅ [LIFESPAN] SigLIP processor ready")
 
     yield
 
-    print("🛑 [LIFESPAN] Cerrando servicios...")
+    print("🛑 [LIFESPAN] Shutting down services...")
     db_manager.disconnect()
     processor = None
-    print("👋 [LIFESPAN] Recursos liberados")
+    print("👋 [LIFESPAN] Services shut down succesfully")
 
 app = FastAPI(
     title="Filmmaker Shotlist RAG API (Demo Mode)",
@@ -51,12 +51,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Servir los frames estáticos de las películas
+# Mount folder with extracted shots 
 app.mount("/api/frames", StaticFiles(directory=SHOTS_DIR), name="frames")
 
 
 # ------------------------------------------------------------------------------
-# ENDPOINTS (Frontend + Búsqueda)
+# ENDPOINTS (Frontend + Search)
 # ------------------------------------------------------------------------------
 
 @app.get("/", response_class=FileResponse)
@@ -77,10 +77,10 @@ async def search_shots(payload: SearchQuery):
             detail="El procesador no está inicializado.",
         )
 
-    # 1. Vectorizar texto de búsqueda
+    # 1. Convert query to embeddings for search
     query_vector = processor.encode_text_query(payload.query)
 
-    # 2. Buscar en ChromaDB
+    # 2. Search on ChromaDB
     results = db_manager.search_similar(
         query_vector=query_vector,
         n_results=payload.n_results,
@@ -90,7 +90,7 @@ async def search_shots(payload: SearchQuery):
     if not results:
         return SearchResponse(query=payload.query, movie_title_filter=payload.movie_title, results=[])
 
-    # 3. Limpiar y estructurar tipos para la respuesta
+    # 3. Give results proper structure
     cleaned_results = []
     for r in results:
         meta = r.get("metadata") or {}
