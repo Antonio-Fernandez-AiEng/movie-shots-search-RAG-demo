@@ -1,0 +1,38 @@
+[
+    {
+        "query": "Snake in the desert",
+        "expected_movie": "Babylon",
+        "expected_timestamp": 130.22,
+        "tolerance_range": 5.0,
+        "ground_truth": "Frame from the movie 'Babylon' showing a close shot of a curled up snake in the desert at timestamp 130.22 seconds."
+    },
+    {
+        "query": "Two men building a wooden house",
+        "expected_movie": "12 Years A Slave TRAILER 1 (2013)",
+        "expected_timestamp": 16.83,
+        "tolerance_range": 4.0,
+        "ground_truth": "Frame from the movie '12 Years A Slave' showing a wide shot with two men building a wooden frame in the broad daylight, timestamp 16.83 seconds."
+    },
+    {
+        "query": "Woman sitting in a bar with two beers on the table",
+        "expected_movie": "F1 The Movie",
+        "expected_timestamp": 6.84,
+        "tolerance_range": 4.0,
+        "ground_truth": "Frame from the movie 'F1 the movie' showing a woman sitting at a bar table, with hard lighting coming from the window and two beers on the table, at 6.84 seconds."
+    },
+    {
+        "query": "Helicopters flying over jungle",
+        "expected_movie": "Kong： Skull Island",
+        "expected_timestamp": 88.8,
+        "tolerance_range": 4,
+        "ground_truth": "Frame from the movie 'Kong : Skull Island' showing a wide shot oftwo helicopters flying away from an explosion over the jungle at timestamp 88.8 seconds."
+    },
+    {
+        "query": "Blonde woman drinking from a straw",
+        "expected_movie": "The Wolf of Wall Street",
+        "expected_timestamp": 51.69,
+        "tolerance_range": 4.0,
+        "ground_truth": "Frame from the movie 'The wolf of Wall Street' showing a close shot of a blonde woman in an interior drinking from a straw at timestamp 51.69 seconds."
+    }
+    
+]
