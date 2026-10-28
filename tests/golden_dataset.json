@@ -22,7 +22,7 @@
     },
     {
         "query": "Helicopters flying over jungle",
-        "expected_movie": "Kong： Skull Island",
+        "expected_movie": "kong_skull_island",
         "expected_timestamp": 88.8,
         "tolerance_range": 4,
         "ground_truth": "Frame from the movie 'Kong : Skull Island' showing a wide shot oftwo helicopters flying away from an explosion over the jungle at timestamp 88.8 seconds."
