@@ -1,3 +1,10 @@
+from pathlib import Path
+import sys
+
+root_dir = Path(__file__).resolve().parent.parent
+if str(root_dir) not in sys.path:
+  sys.path.insert(0, str(root_dir))
+
 import json
 from pathlib import Path
 from services.db_manager import db_manager
@@ -100,7 +107,7 @@ def run_evaluation():
         for res in evaluation_results:
             f.write(f"\"{res['Query']}\",\"{res['Expected_Movie']}\",{res['Expected_Time']},{res['Status']},{res['Position']}\n")
 
-    print(f"💾 Metrics report succesfully sabed in'{report_path}'.")
+    print(f"💾 Metrics report succesfully saved in'{report_path}'.")
     db_manager.disconnect()
 
 if __name__ == "__main__":

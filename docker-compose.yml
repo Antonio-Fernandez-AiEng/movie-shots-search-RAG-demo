@@ -8,5 +8,6 @@ services:
     volumes:
       - ./data/extracted_shots:/app/data/extracted_shots
       - ./databases/chroma_db:/app/databases/chroma_db
+      - ./tests:/app/tests    
     environment:
       - PYTHONUNBUFFERED=1
